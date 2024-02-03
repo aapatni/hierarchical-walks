@@ -1,6 +1,8 @@
 # Hierarchical Node Embeddings for Robust Graph Machine Learning
 Course project for CS 8803 Machine Learning for Graphs
 
+Adam Patni & Manoj Niverthi
+
 Prof: Yunan Luo @ Georgia Tech
 
 ## Overview
