@@ -1,0 +1,6 @@
+dataset_name: 'graph_ppi'
+mode: 'sg'
+context_radius: 2
+max_length: 256
+is_graph: true
+additional_parameters: ???

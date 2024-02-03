@@ -1,0 +1,69 @@
+defaults:
+  - w2v_config
+  
+model:
+  _target_: hw.embeddings.word2vec.model.SkipGram
+  embedding_size: 8
+  max_norm: null
+  # vocab_size - unknown until dataset is loaded
+
+datamodule:
+  batch_size: 128
+  num_workers: 8
+
+train:
+  experiment: ???
+  accelerator: 'gpu'  # (cpu, gpu)
+  devices: '1'
+
+  optimizer:
+    _target_: torch.optim.Adam
+    lr: 0.1
+
+  max_epochs: 20
+
+  scheduler:
+    _target_: torch.optim.lr_scheduler.StepLR
+    step_size: 20
+    gamma: 0.1
+
+  loss:
+    negative_samples: 5
+
+analysis:
+  checkpoint: 'last.ckpt'
+
+  closest_pairs:
+    enable: true
+    max_words: 50
+    pairs_per_word: 5
+
+  visualize_embeddings:
+    enable: true
+    annotate: false
+    max_words: 10_000
+
+  semantics_test:
+    enable: false
+
+downstream:
+  checkpoint: 'last.ckpt'
+
+  node_classification:
+    enable: true
+    n_experiments: 10
+    visualize: false
+    split_algorithm:
+      _target_: hw.embeddings.split.TrainTestRatioSplit
+      train_ratio: 0.75
+    classifier_params:
+      C: 1e-3
+      max_iter: 1_000
+
+  edge_classification:
+    enable: true
+    operator_name: 'hadamard'
+    train_ratio: 0.5
+    n_experiments: 10
+    classifier_params:
+      max_iter: 1_000

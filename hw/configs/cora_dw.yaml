@@ -1,0 +1,16 @@
+defaults:
+  - base
+  - datamodule: cora
+
+train:
+  experiment: 'cora_dw'
+
+datamodule:
+  additional_parameters:
+    method: deepwalk
+    
+    walks_per_node: 8
+    walk_length: 8
+    
+    num_compressions: 0
+    compression_selection_ratio: 0

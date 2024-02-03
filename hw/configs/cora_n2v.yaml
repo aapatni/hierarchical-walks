@@ -1,0 +1,19 @@
+defaults:
+  - base
+  - datamodule: cora
+
+train:
+  experiment: 'cora_node2vec'
+
+datamodule:
+  additional_parameters:
+    method: node2vec
+    method_params:
+      p: 1
+      q: 2.0
+    
+    walks_per_node: 8
+    walk_length: 8
+    
+    num_compressions: 0
+    compression_selection_ratio: 0

@@ -1,0 +1,21 @@
+defaults:
+  - base
+  - datamodule: ppi
+
+train:
+  experiment: 'ppi_adv_dw_random_edge_addition'
+
+datamodule:
+  additional_parameters:
+    method: adv_deepwalk
+    method_params:
+      prior_transformation: randomly_add_edges
+      num_perturbations_prior: 41000
+      step_transformation: do_nothing
+      num_perturbations_step: 0
+
+    walks_per_node: 8
+    walk_length: 8
+
+    num_compressions: 0
+    compression_selection_ratio: 0

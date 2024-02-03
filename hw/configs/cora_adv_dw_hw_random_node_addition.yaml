@@ -1,0 +1,21 @@
+defaults:
+  - base
+  - datamodule: cora
+
+train:
+  experiment: 'cora_adv_dw_hw_random_node_addition'
+
+datamodule:
+  additional_parameters:
+    method: adv_deepwalk
+    method_params:
+      prior_transformation: randomly_add_nodes
+      num_perturbations_prior: 135
+      step_transformation: do_nothing
+      num_perturbations_step: 0
+
+    walks_per_node: 8
+    walk_length: 8
+
+    num_compressions: 2
+    compression_selection_ratio: .5

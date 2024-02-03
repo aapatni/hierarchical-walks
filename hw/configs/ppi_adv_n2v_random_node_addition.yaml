@@ -1,0 +1,23 @@
+defaults:
+  - base
+  - datamodule: ppi
+
+train:
+  experiment: 'ppi_adv_n2v_random_node_addition'
+
+datamodule:  
+  additional_parameters:
+    method: adv_node2vec
+    method_params:
+      prior_transformation: randomly_add_nodes
+      num_perturbations_prior: 2850
+      step_transformation: do_nothing
+      num_perturbations_step: 0
+      p: 1
+      q: 2.0
+    
+    walks_per_node: 8
+    walk_length: 8
+    
+    num_compressions: 0
+    compression_selection_ratio: 0
